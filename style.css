@@ -22,6 +22,7 @@ body {
 }
 
 #header-logo {
+    cursor: pointer;
     color: #fff;
     font-family: "Arial", sans-serif;
     font-weight: bold;
@@ -55,8 +56,8 @@ body {
 
 #menu-logo {
     cursor: pointer;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     margin-right: 150px;
 }
 
@@ -113,6 +114,9 @@ body {
 
 #dataBaseMenu {
     list-style: none;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 20px;
 }
 
 #dataBaseMenu li {
@@ -123,6 +127,56 @@ body {
     line-height: 30px;
     color: #fff;
     cursor: pointer;
+}
+
+#add-form {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 999;
+    margin-top: 30px;
+}
+
+#add-form table tr td{
+    padding: 5px;
+    font-size: 20px;
+    border: 1px solid #fff;
+    text-align: center;
+    background-color:  #02547D;
+    color: #fff;
+}
+
+#add-form table tr td input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: #02547D;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+}
+
+#add-form table{
+    width: 80%;
+}
+
+#add-form button {
+    width: 200px;
+    height: 50px;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: #02BEC4;
+    outline: none;
+}
+
+.activeFlex {
+    display: flex !important;
+}
+
+.opacBody {
+    display: none;
 }
 
 
