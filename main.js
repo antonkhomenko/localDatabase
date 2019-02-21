@@ -118,6 +118,39 @@ applyBtn.addEventListener("click", function(){
     dataBaseTbl.classList.toggle("opacBody");
 });
 
+var checkVar4 = 0;
+
+dataBaseMenu.children[0].addEventListener("click", function(){
+if(checkVar4 == 0){
+    checkVar4 = 1;
+    for(var itt = 0; itt < alsF.length; itt++){
+        for(let i = 0; i < 3; i++){
+            dataBaseTbl.children[0].children[itt + 1].children[i].style.border = "1px solid red";
+            dataBaseTbl.children[0].children[itt + 1].children[i].style.color = "red";
+        }
+    };
+        for(var tit = 1; tit < alsF.length + 1; tit++){
+            for(let i = 1; i < 3; i++){
+            var changeBtn = document.createElement("button");
+            changeBtn.innerHTML = "Изменить";
+            changeBtn.onclick = function(){
+                var clickTr = this.parentElement.parentElement;
+                    if(clickTr.children[1] == this.parentElement){
+                        var clickElemName = clickTr.children[0].innerHTML;
+                        var newValue = prompt("Введите новое значение");
+                        localStorage.setItem(clickElemName, newValue);
+                    }else {
+                        var clickElemName2 = clickTr.children[0].innerHTML;
+                        var newValue2 = prompt("Введите новое значение");
+                        localStorage.setItem(clickElemName2 + "Price", newValue2);
+                    }
+            }
+            changeBtn.style.marginLeft = "10px";
+            dataBaseTbl.children[0].children[tit].children[i].appendChild(changeBtn);
+            };
+        };
+};
+});
 
 
 
