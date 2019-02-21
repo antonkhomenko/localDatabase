@@ -8,8 +8,13 @@ var searchLine = document.getElementById("search-line");
 var addForm = document.getElementById("add-form");
 var applyBtn = document.getElementById("apply-btn");
 var addingTr = document.getElementById("adding-tr");
-
-
+var als = Object.keys(localStorage);
+var alsF;
+alsF = als.filter(function(item, index, array){
+    if(item.indexOf("Price") == -1){
+        return item;
+    }
+});
 menuLogo.addEventListener("click", function(){
     headerMenu[0].classList.toggle("headerMenuActive");
     menuLogo.classList.toggle("rotateMenuLogo");
@@ -19,26 +24,6 @@ headerLogo.addEventListener("click", function(){
     location.reload();
 });
 
-
-var dataBase = {
-    // "Гвозди H": 10,
-    // "Гвозди О": 34,
-    // "Пивко": 45,
-    // "Кран": 5,
-};
-
-
-
-var dataBasePrice = {
-
-};
-
-var keys = Object.keys(dataBase);
-
-// dataBasePrice[keys[0]] = 100;
-// dataBasePrice[keys[1]] = 500;
-// dataBasePrice[keys[2]] = 200;
-// dataBasePrice[keys[3]] = 900;
 
 var checkVar = 0;
 
@@ -52,7 +37,9 @@ if(checkVar == 0){
             window.location.reload();
           });
     }
-    for(let i = 0; i < keys.length; i++){
+///////
+
+    for(let i = 0; i < alsF.length; i++){
         var tr = document.createElement("tr");
         dataBaseTbl.children[0].appendChild(tr);
     };
@@ -64,9 +51,10 @@ if(checkVar == 0){
     };
     for(var z = 0; z < dataBaseTbl.children[0].children.length; z++){
         // for(let i = 1; i < 3; i++){
-        dataBaseTbl.children[0].children[z + 1].children[0].innerHTML = keys[z];
-        dataBaseTbl.children[0].children[z + 1].children[1].innerHTML = dataBase[keys[z]];
-        dataBaseTbl.children[0].children[z + 1].children[2].innerHTML = dataBasePrice[keys[z]];
+        
+        dataBaseTbl.children[0].children[z + 1].children[0].innerHTML = alsF[z];
+        dataBaseTbl.children[0].children[z + 1].children[1].innerHTML = localStorage[alsF[z]];
+        dataBaseTbl.children[0].children[z + 1].children[2].innerHTML = localStorage[alsF[z] + "Price"];
         // }
         checkVar3 = 1;
     };
@@ -86,8 +74,8 @@ if(checkVar2 == 0){
           });
     }
     var searchTxt = searchLine.value;
-    var searchElementIndex
-    keys.forEach(function(item, index, array){
+    var searchElementIndex;
+    alsF.forEach(function(item, index, array){
         if(searchTxt == item){
              searchElementIndex = index;
         };
@@ -99,10 +87,9 @@ if(checkVar2 == 0){
           var tdS = document.createElement("td");
           trS.appendChild(tdS);
       }
-
-    dataBaseTbl.children[0].children[1].children[0].innerHTML = keys[searchElementIndex];
-    dataBaseTbl.children[0].children[1].children[1].innerHTML = dataBase[keys[searchElementIndex]];
-    dataBaseTbl.children[0].children[1].children[2].innerHTML = dataBasePrice[keys[searchElementIndex]];
+    dataBaseTbl.children[0].children[1].children[0].innerHTML = alsF[searchElementIndex];
+    dataBaseTbl.children[0].children[1].children[1].innerHTML = localStorage[alsF[searchElementIndex]];
+    dataBaseTbl.children[0].children[1].children[2].innerHTML = localStorage[alsF[searchElementIndex] + "Price"];
 
     }else {
         alert("Товар не найден");
@@ -115,6 +102,7 @@ if(checkVar2 == 0){
 
 });
 
+
 dataBaseMenu.children[2].addEventListener("click", function(){
     addForm.classList.toggle("activeFlex");
     dataBaseTbl.classList.toggle("opacBody");
@@ -123,10 +111,11 @@ dataBaseMenu.children[2].addEventListener("click", function(){
 applyBtn.addEventListener("click", function(){
     var keyLS = addingTr.children[0].children[0].value;
     var valueLS = addingTr.children[1].children[0].value;
+    var valuePrice = addingTr.children[2].children[0].value;
     localStorage.setItem(keyLS, valueLS);
+    localStorage.setItem(keyLS + "Price", valuePrice);
     addForm.classList.toggle("activeFlex");
     dataBaseTbl.classList.toggle("opacBody");
-    console.log(keyLS);
 });
 
 
