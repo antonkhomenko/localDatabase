@@ -74,32 +74,31 @@ if(checkVar2 == 0){
           });
     }
     var searchTxt = searchLine.value;
-    var searchElementIndex;
-    alsF.forEach(function(item, index, array){
-        if(searchTxt == item){
-             searchElementIndex = index;
-        };
+    var searchArrayRes = alsF.filter(function(item, index, array){
+        if(array[index].indexOf(searchTxt) != -1){
+            return item;
+        }
     });
-    if(searchElementIndex != undefined){
-      var trS = document.createElement("tr");
-      dataBaseTbl.children[0].appendChild(trS);
-      for(let i = 0; i < 3; i++){
-          var tdS = document.createElement("td");
-          trS.appendChild(tdS);
-      }
-    dataBaseTbl.children[0].children[1].children[0].innerHTML = alsF[searchElementIndex];
-    dataBaseTbl.children[0].children[1].children[1].innerHTML = localStorage[alsF[searchElementIndex]];
-    dataBaseTbl.children[0].children[1].children[2].innerHTML = localStorage[alsF[searchElementIndex] + "Price"];
 
-    }else {
-        alert("Товар не найден");
+    if(searchArrayRes.length != 0) {
+    for(let i = 0; i < searchArrayRes.length; i++){
+        let tr = document.createElement("tr");
+        dataBaseTbl.children[0].appendChild(tr);
+        for(let i = 0; i < 3; i++){
+            let td = document.createElement("td");
+            tr.appendChild(td);
     }
-}else {
-    setTimeout(function(){
-        window.location.reload();
-      });
-}
+};
 
+    for(var i22 = 0; i22 < dataBaseTbl.children[0].children.length; i22++){
+        dataBaseTbl.children[0].children[i22 + 1].children[0].innerHTML = searchArrayRes[i22];
+        dataBaseTbl.children[0].children[i22 + 1].children[1].innerHTML = localStorage[searchArrayRes[i22]];
+        dataBaseTbl.children[0].children[i22 + 1].children[2].innerHTML = localStorage[searchArrayRes[i22] + "Price"];
+    };
+}else {
+    alert("Товар не найден");
+}
+};
 });
 
 
@@ -151,6 +150,10 @@ if(checkVar4 == 0){
         };
 };
 });
+
+
+
+
 
 
 
